@@ -5,56 +5,191 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Drew's Card Sales</title>
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #ffffff; color: #000000; text-align: center; margin: 0; padding: 0; }
-  header { background-color: #00D632; color: white; padding: 30px 20px; }
-  h1 { margin: 0; font-size: 2em; }
-  h2 { color: #00D632; }
-  section { padding: 30px 20px; margin: 20px auto; max-width: 600px; border: 2px solid #f0f0f0; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-  a.button { display: inline-block; background-color: #00D632; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 10px; }
-  a.button:hover { background-color: #00b329; }
-  .event-item { padding: 10px; border-bottom: 1px solid #eee; }
-  img.qr { max-width: 250px; border-radius: 15px; margin-top: 15px; border: 1px solid #eee; }
-  .contact-info { margin-top: 15px; font-size: 1.1em; }
+    /* Premium Dark Theme with Snazz */
+    :root {
+        --bg-dark: #000000;
+        --card-dark: #121212;
+        --text-light: #f5f5f5;
+        --text-med: #b5b5b5;
+        --accent-green: #00D632; /* Cash App Green */
+        --accent-orange: #FF9F00; /* Subtle orange highlight from poster */
+        --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Montserrat, 'Inter', sans-serif;
+    }
+
+    body {
+        font-family: var(--font-family);
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    /* Premium, framed header */
+    header {
+        background-color: var(--card-dark);
+        border-bottom: 2px solid var(--accent-green);
+        color: #fff;
+        padding: 60px 20px;
+        margin-bottom: 40px;
+        box-shadow: 0 5px 20px rgba(0, 214, 50, 0.1);
+    }
+
+    h1 { margin: 0; font-size: 3em; font-weight: 800; text-shadow: 0 0 10px rgba(0,214,50,0.3); }
+    h1 .subtitle { font-size: 0.5em; display: block; color: var(--text-med); font-weight: 400; margin-top: 10px;}
+
+    h2 {
+        color: var(--accent-green);
+        font-size: 2.2em;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+        text-shadow: 0 0 5px rgba(0,214,50,0.2);
+    }
+
+    /* Interactive section cards */
+    section {
+        padding: 50px 30px;
+        margin: 30px auto;
+        max-width: 680px;
+        background-color: var(--card-dark);
+        border-radius: 25px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        border: 1px solid transparent;
+        transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    }
+
+    section:hover {
+        transform: translateY(-8px);
+        border-color: rgba(0, 214, 50, 0.3);
+    }
+
+    p { color: var(--text-med); font-size: 1.1em; line-height: 1.7; font-weight: 300; }
+
+    /* Buttons with intense 'pop' */
+    a.button {
+        display: inline-block;
+        background-color: var(--accent-green);
+        color: #000;
+        padding: 18px 36px;
+        text-decoration: none;
+        border-radius: 15px;
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-top: 20px;
+        transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+        box-shadow: 0 6px 15px rgba(0, 214, 50, 0.4);
+        cursor: pointer;
+    }
+
+    a.button:hover {
+        background-color: #00b329;
+        box-shadow: 0 10px 20px rgba(0, 214, 50, 0.6);
+        transform: scale(1.03);
+    }
+    
+    a.button:active { transform: scale(0.98); }
+
+    /* New, framed event poster presentation */
+    .event-poster-container {
+        margin-top: 30px;
+        border: 6px solid var(--accent-green); /* Framed for attention */
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 214, 50, 0.3);
+        background: #fff; /* White base to help poster colors stand out */
+        padding: 10px;
+    }
+
+    img.event-poster {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 15px;
+    }
+
+    /* Framed QR and detailed contact section */
+    .connect-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(255,255,255,0.02);
+        padding: 30px;
+        border-radius: 20px;
+        margin-top: 20px;
+    }
+
+    img.qr {
+        max-width: 250px;
+        border-radius: 20px;
+        margin-bottom: 25px;
+        border: 10px solid #fff; /* Mimicking original app look but cleaner */
+        box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    }
+
+    .contact-info {
+        font-size: 1.3em;
+        font-weight: 500;
+    }
+
+    .contact-info p { margin: 10px 0; color: var(--text-light); }
+    .contact-info a { color: var(--accent-green); text-decoration: none; font-weight: bold; }
+    .contact-info a:hover { text-decoration: underline; color: var(--accent-orange); }
+
+    /* Utility Class for Text Pop */
+    .pop-text {
+        color: var(--accent-green);
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 1.05em;
+        padding: 0 3px;
+    }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Andrew's Pokémon Card Sales</h1>
-  <p>Local Trades, Sales, and Meetups</p>
+  <h1>Drew's Card Sales</h1>
+  <span class="subtitle">PREMIUM COLLECTIBLES | LOCAL TRADES & EVENTS</span>
 </header>
 
 <section id="collection">
   <h2>My Collection</h2>
-  <p>Browse my current inventory of cards and sealed products.</p>
+  <p>Explore my curated inventory of Pokémon cards, graded chase cards, and <span class="pop-text">sealed products</span> on Collectr.</p>
   <a href="https://app.getcollectr.com/showcase/profile/5dd694c3-3ac8-4146-a9c0-d4f9dc56920f" class="button" target="_blank">View My Collectr</a>
 </section>
 
 <section id="meetup">
   <h2>Schedule a Meetup</h2>
-  <p>Found something you like? Book a time and public place for us to meet up and complete the sale or trade.</p>
-  <a href="YOUR_CALENDLY_LINK_HERE" class="button" target="_blank">Book a Time</a>
+  <p>Found something you like? Book a <span class="pop-text">safe and public time & place</span> for local delivery, trades, or to complete a purchase in person.</p>
+  <a href="YOUR_CALENDLY_LINK_HERE" class="button" target="_blank">Book a Meetup Time</a>
 </section>
 
 <section id="events">
-  <h2>Where I'll Be</h2>
-  <p>Come see me in person at these upcoming events:</p>
-  <div class="event-item"><strong>June 15:</strong> Local Trade Night @ Community Center</div>
-  <div class="event-item"><strong>July 22:</strong> Regional Card Show @ Convention Center</div>
+  <h2>Upcoming Event!</h2>
+  <p>The <span class="pop-text">Havelock Card Show</span> is my next major stop! Come visit my table for <span class="pop-text">exclusives and trade nights</span>.</p>
+  
+  <div class="event-poster-container">
+    <img src="havelock-card-show.png" alt="Havelock Card Show Poster" class="event-poster">
+  </div>
 </section>
 
 <section id="connect">
-  <h2>Connect With Me</h2>
-  <p>Scan the code below to send payments easily via Cash App ($drewgames).</p>
+  <h2>Connect & Pay</h2>
+  <p>Scan the code below to connect on <span class="pop-text">Cash App ($drewgames)</span>, easily send payments, or reach out to chat about cards.</p>
   
-  <img src="cashapp-qr.png" alt="Andrew's CashApp QR Code" class="qr"><br>
-  
-  <div class="contact-info">
-    <p><strong>Email:</strong> andrewlestermac@gmail.com</p>
-    <p><strong>Phone:</strong> 252-670-8758</p>
+  <div class="connect-wrapper">
+    <img src="cashapp-qr.png" alt="Andrew's CashApp QR Code" class="qr">
+    
+    <div class="contact-info">
+      <p><strong>Email:</strong> <a href="mailto:andrewlestermac@gmail.com">andrewlestermac@gmail.com</a></p>
+      <p><strong>Phone:</strong> <a href="tel:252-670-8758">252-670-8758</a></p>
+    </div>
   </div>
   
-  <a href="contact.vcf" class="button" download>Save Contact Card</a>
+  <a href="contact.vcf" class="button" download>Save My Contact Card</a>
 </section>
 
 </body>
